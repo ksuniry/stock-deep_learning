@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stock.mvc.dao.koreanInvestment.Hoga20Dao">
+
+	<select id="selectHoga20TableCheck" resultType="Hoga20VO" parameterType="companyBagicInfoVO">
+			SELECT	*
+			FROM	stock.hoga20_${isuSrtCd}
+			ORDER BY id
+			LIMIT 1
+	</select>
+	
+	<select id="createHoga20Table" parameterType="java.lang.String">
+			${value}
+	</select>
+	
+	<insert id="insertHoga20" parameterType="companyBagicInfoVO">
+			INSERT INTO stock.hoga20_${isuSrtCd} VALUES (#{id}, #{info})
+	</insert>
+	
+</mapper> 

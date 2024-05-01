@@ -1,0 +1,65 @@
+spring:
+  profiles:
+    active : local  
+  jmx:
+    default-domain: api
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    view-names:
+      - thymeleafView/*  
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-path-pattern: /resources/**      
+  servlet:
+    encoding:
+      charset: UTF-8
+  devtools: 
+    livereload:
+      enabled: true    
+server:
+  port: 80  
+---  
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/deep-learning-prototype?authSource=admin
+      #host: localhost
+      #port: 27017
+      #authentication-database: admin 
+      #database: deep-learning-prototype
+      #username: mongodb
+      #password: 7303 
+---
+spring: 
+ datasource:
+  hikari: 
+   jdbc-url: jdbc:postgresql://localhost:5432/postgres
+   username: postgres
+   password: 7303
+   driver-class-name: org.postgresql.Driver
+   schema: stock   
+   pool-name: hikari-cp
+   connection-timeout: 3000
+   validation-timeout: 3000
+   maximum-pool-size: 200
+   max-lifetime: 180000
+   data-source-properties: 
+    cachePrepStmts: true
+    prepStmtCacheSize: 250
+    prepStmtCacheSqlLimit: 2048
+    useServerPrepStmts: true 
+---
+korea-investment:
+  app-key: 39e7ceaef509c0535a3620159cedc1cb123dbb9012a2fe8d31b1c4228bfac6fb60bb7a39483477d5d90894ebc56f84d5
+  secret-key: fdbc9c6fc604a1dc7d0dbfc244dd39ed7027865bcf39f99a06b66d632216fbd505e5ece4ce683995e984f5e38969d46e1a5977503addcf1d551185900003c242751f758f328c089106303ccd0c22bb180b83814e367ba9fd65a5b89c2eb84866c6ed58d7c812834c8b4f5d36b9c586de7531600c5aef0756ffc9f0037eb67deb107f626f6fb0096317db561a5d87f5057f83237e4b7afbf1cf69ad3f3a9505e53ba7c27c92c629973c414df43329f65c07e05c09620475001fe4c5f6c7e42a64
+  tr-id: FHKST01010300
+  url: https://openapi.koreainvestment.com:9443
+krx:
+  url: http://data.krx.co.kr

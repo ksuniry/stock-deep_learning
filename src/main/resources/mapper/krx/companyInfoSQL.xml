@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stock.mvc.dao.krx.CompanyInfoDao">
+	<select id="companyBagicInfoList" resultType="CompanyBagicInfoVO">
+		SELECT * FROM STOCK.COMPANY_BAGIC_INFO
+	</select>
+	
+	<select id="companyBagicInfoHoga20List" resultType="CompanyBagicInfoVO">
+		SELECT 	* 
+		FROM 	STOCK.COMPANY_BAGIC_INFO
+		WHERE 	ISU_NM LIKE '%보통주%'
+	</select>
+	
+	<select id="companyBagicInfoHoga20ListByisuSrtCdList" resultType="CompanyBagicInfoVO">
+		SELECT 	* 
+		FROM 	STOCK.COMPANY_BAGIC_INFO
+		WHERE 	ISU_SRT_CD IN
+		<foreach collection="list" item="isuSrtCd" open="(" close=")" separator=",">
+		 #{isuSrtCd}
+		</foreach>
+	</select>
+	
+	<insert id="insertCompanyBagicInfoList" parameterType="CompanyBagicInfoVO">
+		INSERT INTO STOCK.COMPANY_BAGIC_INFO
+	  	VALUES
+	  	<foreach collection="list" item="vo" separator=" , ">
+		  (	#{vo.isuCd}
+		  	, #{vo.isuSrtCd}
+		  	, #{vo.isuNm}
+		  	, #{vo.isuAbbrv}
+		  	, #{vo.isuEngNm}
+		  	, #{vo.listDd}
+		  	, #{vo.mktTpNm}
+		  	, #{vo.secugrpNm}
+		  	, #{vo.sectTpNm}
+		  	, #{vo.kindStkcertTpNm}
+		  	, #{vo.parval}
+		  	, #{vo.listShrs}
+		  	, #{vo.useYn}
+		  	)
+	  	</foreach>
+	</insert>
+	
+	
+	
+	<insert id="updateUseYnCompanyBagicInfoList" parameterType="CompanyBagicInfoVO">
+		<foreach collection="list" item="vo" separator=";">
+        UPDATE	STOCK.COMPANY_BAGIC_INFO
+        SET		USE_YN = #{vo.useYn}
+        WHERE ISU_CD = #{vo.isuCd}
+    </foreach>
+	</insert>
+</mapper> 
